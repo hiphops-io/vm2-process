@@ -22,7 +22,8 @@ const crypto_1 = __importDefault(require("crypto"));
 const generic_pool_1 = __importDefault(require("generic-pool"));
 const final_stream_1 = __importDefault(require("final-stream"));
 const waitUntil_js_1 = __importDefault(require("./waitUntil.js"));
-const __dirname = (0, path_1.dirname)((0, url_1.fileURLToPath)(import.meta.url));
+// clashes with node __dirname
+const __dirName = (0, path_1.dirname)((0, url_1.fileURLToPath)(import.meta.url));
 const createVm2Pool = (_a) => {
     var { min, max } = _a, limits = __rest(_a, ["min", "max"]);
     limits = Object.assign({
@@ -42,7 +43,7 @@ const createVm2Pool = (_a) => {
                 '-ql', limits.cpu,
                 '--',
                 'node', `--max-old-space-size=${limits.memory}`, 'vm2ProcessRunner.js', ref
-            ], { cwd: __dirname, shell: false });
+            ], { cwd: __dirName, shell: false });
             runner.stdout.on('data', (data) => {
                 runner.socket = runner.socket || data.toString().trim();
             });
