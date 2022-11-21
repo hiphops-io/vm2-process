@@ -1,13 +1,10 @@
 import { spawn } from 'child_process';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
 import net from 'net';
 import crypto from 'crypto';
 import genericPool from 'generic-pool';
 import finalStream from 'final-stream';
 import waitUntil from './waitUntil.js';
 const createVm2Pool = ({ min, max, ...limits }) => {
-    const __dirName = dirname(fileURLToPath(import.meta.url));
     limits = Object.assign({
         cpu: 100,
         memory: 2000,
@@ -25,7 +22,7 @@ const createVm2Pool = ({ min, max, ...limits }) => {
                 '-ql', limits.cpu,
                 '--',
                 'node', `--max-old-space-size=${limits.memory}`, 'vm2ProcessRunner.js', ref
-            ], { cwd: __dirName, shell: false });
+            ], { cwd: __dirname, shell: false });
             runner.stdout.on('data', (data) => {
                 runner.socket = runner.socket || data.toString().trim();
             });
