@@ -22,10 +22,9 @@ const crypto_1 = __importDefault(require("crypto"));
 const generic_pool_1 = __importDefault(require("generic-pool"));
 const final_stream_1 = __importDefault(require("final-stream"));
 const waitUntil_js_1 = __importDefault(require("./waitUntil.js"));
-// clashes with node __dirname
-const __dirName = (0, path_1.dirname)((0, url_1.fileURLToPath)(import.meta.url));
 const createVm2Pool = (_a) => {
     var { min, max } = _a, limits = __rest(_a, ["min", "max"]);
+    const __dirName = (0, path_1.dirname)((0, url_1.fileURLToPath)(import.meta.url));
     limits = Object.assign({
         cpu: 100,
         memory: 2000,
